@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #f4e4d6;
+      color: #2e1e0f;
+    }
+
+    header {
+      background-color: #3e2c1c;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero {
+      background: url('steak.jpg') no-repeat center center/cover;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero button {
+      padding: 0.75rem 1.5rem;
+      background-color: #3e2c1c;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .welcome, .menu {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .menu-items {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-items img {
+      width: 200px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #3e2c1c;
+      color: #fff;
+      display: flex;
+      justify-content: space-around;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    footer div {
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RESTAURANT</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="E:\Practice_HTML\menu.html">Menu</a></li>
+        <!-- <li><a href="#">About</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Delicious Food & Great Service</h1>
+    <a href="E:\Practice_HTML\order.html"><button>Order Now</button></a>
+  </section>
+
+  <section class="welcome">
+    <h2>Welcome to Our Restaurant</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </section>
+
+  <section class="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-items">
+      <img src="E:\Practice_HTML\IMAGE\pizza.jfif" alt="Pizza">
+      <img src="E:\Practice_HTML\IMAGE\pasta.jpg" alt="Pasta">
+      <img src="E:\Practice_HTML\IMAGE\salad.avif" alt="Salad">
+    </div>
+  </section>
+
+  <footer>
+    <div class="about">
+      <h3>About Us</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+    </div>
+    <div class="contact">
+      <h3>Contact</h3>
+      <p>123 Main St, Anytown, USA<br>info@example.com</p>
+    </div>
+  </footer>
+</body>
+</html>

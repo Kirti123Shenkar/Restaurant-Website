@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Place Your Order - Restaurant</title>
+
+  <!-- JsBarcode Library -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdf6f0;
+      margin: 0;
+      padding: 0;
+      color: #3e2c1c;
+    }
+
+    header {
+      background-color: #3e2c1c;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: #d35400;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .menu-item label {
+      flex: 1;
+    }
+
+    .menu-item input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #e67e22;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #3e2c1c;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #3e2c1c;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    #barcode {
+      display: block;
+      margin: 2rem auto;
+    }
+
+    /* Print Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      main, main * {
+        visibility: visible;
+      }
+
+      main {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background-color: #fff;
+      }
+
+      form input, form textarea, form button {
+        display: none;
+      }
+
+      #barcode {
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Place Your Order</h1>
+</header>
+
+<main>
+  <form id="order-form">
+
+    <!-- 🍕 Pizza Section -->
+    <h2>Pizza</h2>
+    <div class="menu-item">
+      <label for="margherita">Margherita – ₹299</label>
+      <input type="number" id="margherita" data-price="299" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="pepperoni">Pepperoni – ₹349</label>
+      <input type="number" id="pepperoni" data-price="349" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="cheese">Cheese Burst – ₹399</label>
+      <input type="number" id="cheese" data-price="399" min="0" value="0">
+    </div>
+
+    <!-- 🍝 Pasta Section -->
+    <h2>Pasta</h2>
+    <div class="menu-item">
+      <label for="white">White Sauce Pasta – ₹259</label>
+      <input type="number" id="white" data-price="259" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="spaghetti">Spaghetti – ₹299</label>
+      <input type="number" id="spaghetti" data-price="299" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="macaroni">Macaroni – ₹229</label>
+      <input type="number" id="macaroni" data-price="229" min="0" value="0">
+    </div>
+
+    <!-- 🥗 Salad Section -->
+    <h2>Salads</h2>
+    <div class="menu-item">
+      <label for="caesar">Caesar Salad – ₹199</label>
+      <input type="number" id="caesar" data-price="199" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="green">Green Salad – ₹179</label>
+      <input type="number" id="green" data-price="179" min="0" value="0">
+    </div>
+    <div class="menu-item">
+      <label for="fruit">Fruit Salad – ₹149</label>
+      <input type="number" id="fruit" data-price="149" min="0" value="0">
+    </div>
+
+    <!-- Total Price -->
+    <div id="total">Total: ₹0</div>
+
+    <!-- Barcode -->
+    <div>
+      <svg id="barcode"></svg>
+    </div>
+
+    <!-- 🧍 Customer Info -->
+    <h2>Your Details</h2>
+    <input type="text" name="name" placeholder="Your Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <textarea name="address" rows="4" placeholder="Delivery Address" required></textarea>
+
+    <!-- 📩 Submit -->
+    <button type="submit">Submit Order</button>
+
+    <!-- 🖨️ Print Button -->
+    <button type="button" onclick="window.print()" style="margin-top: 1rem; background-color: #d35400;">
+      🖨️ Print Order Summary
+    </button>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2025 Restaurant. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript for Total & Barcode -->
+<script>
+  const inputs = document.querySelectorAll('input[type="number"]');
+  const totalDisplay = document.getElementById('total');
+
+  function updateTotal() {
+    let total = 0;
+    inputs.forEach(input => {
+      const price = parseInt(input.dataset.price);
+      const quantity = parseInt(input.value);
+      total += price * quantity;
+    });
+
+    totalDisplay.textContent = "Total: ₹" + total;
+
+    if (total > 0) {
+      JsBarcode("#barcode", total.toString(), {
+        format: "CODE128",
+        lineColor: "#000",
+        width: 2,
+        height: 60,
+        displayValue: true
+      });
+    } else {
+      document.getElementById("barcode").innerHTML = "";
+    }
+  }
+
+  inputs.forEach(input => {
+    input.addEventListener('input', updateTotal);
+  });
+
+  document.getElementById('order-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("🎉 Thank you! Your order has been placed successfully.");
+    this.reset();
+    updateTotal();
+  });
+
+  updateTotal(); // Initialize on load
+</script>
+
+</body>
+</html>
